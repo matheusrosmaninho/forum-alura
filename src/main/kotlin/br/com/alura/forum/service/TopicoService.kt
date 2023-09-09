@@ -1,10 +1,10 @@
 package br.com.alura.forum.service
 
 import br.com.alura.forum.model.Curso
+import br.com.alura.forum.model.Resposta
 import br.com.alura.forum.model.Topico
 import br.com.alura.forum.model.Usuario
 import org.springframework.stereotype.Service
-import java.util.*
 
 @Service
 class TopicoService(private var topicos: List<Topico>) {
@@ -22,7 +22,7 @@ class TopicoService(private var topicos: List<Topico>) {
                 id = 1,
                 nome = "Ana",
                 email = "ana@example.com"
-            )
+            ),
         )
         val topico2 = Topico(
             id = 2,
@@ -65,5 +65,11 @@ class TopicoService(private var topicos: List<Topico>) {
         return topicos.stream().filter({
             t -> t.id == id
         }).findFirst().get()
+    }
+
+    fun buscarRespostas(id: Long): List<Resposta> {
+        return topicos.stream().filter({
+            t -> t.id == id
+        }).findFirst().get().respostas
     }
 }
