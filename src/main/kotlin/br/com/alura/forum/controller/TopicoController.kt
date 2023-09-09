@@ -3,32 +3,17 @@ package br.com.alura.forum.controller
 import br.com.alura.forum.model.Curso
 import br.com.alura.forum.model.Topico
 import br.com.alura.forum.model.Usuario
+import br.com.alura.forum.service.TopicoService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import java.time.LocalDateTime
-import java.util.Arrays
+import java.util.*
 
 @RestController
 @RequestMapping("/topicos")
-class TopicoController {
+class TopicoController(private val  service: TopicoService) {
     @GetMapping
     fun Listar(): List<Topico> {
-        val topico = Topico(
-            id = 1,
-            titulo = "Example title",
-            mensagem = "Test message",
-            curso = Curso(
-                id = 1,
-                nome = "Course 001",
-                categoria = "Example"
-            ),
-            autor = Usuario(
-                id = 1,
-                nome = "Ana",
-                email = "ana@example.com"
-            )
-        )
-        return Arrays.asList(topico, topico, topico)
+        return service.listar()
     }
 }
